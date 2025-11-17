@@ -172,7 +172,13 @@ export default function Page() {
 							onTouchEnd={isTop ? onTouchEnd : undefined}
 						>
 							<div className="media">
-								<img src={profile.foto_url || "https://via.placeholder.com/600"} alt={profile.nombre} className="avatar" />
+								{/* use background-image container to avoid potential <img> rendering issues in WebView */}
+								<div
+									className="avatar"
+									role="img"
+									aria-label={profile.nombre || 'imagen'}
+									style={{ backgroundImage: `url(${profile.foto_url || 'https://via.placeholder.com/600'})` }}
+								/>
 								{isTop && (
 									<>
 										<span className="overlay like" style={{ opacity: Math.max(0, Math.min(1, drag.x / 120)), transform: `translateX(${Math.min(60, drag.x / 3)}px) scale(${Math.max(0.9, Math.min(1.08, 1 + Math.abs(drag.x) / 800))})` }}>❤</span>
@@ -257,9 +263,10 @@ export default function Page() {
 				.card.top { z-index: 110 }
 				.card-area { z-index: 100 }
 
-				.media { position:relative; height:64%; overflow:hidden }
+				.media { position:relative; height:64%; min-height:220px; overflow:hidden; background: linear-gradient(180deg,#fafafa,#fff) }
 				.avatar {
-					width:100%; height:100%; object-fit:cover; display:block
+					width:100%; height:100%; background-size:cover; background-position:center; display:block; background-color:#e9eef2;
+					min-height:220px; border-radius:12px;
 				}
 				.overlay { position:absolute; top:18%; font-size:56px; padding:8px 12px; border-radius:12px; font-weight:900; pointer-events:none; transition:opacity 120ms linear, transform 120ms linear }
 				.overlay.like { left:18px; color: rgba(255,255,255,0.95); text-shadow: 0 6px 22px rgba(255,77,99,0.18) }
