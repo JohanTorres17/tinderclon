@@ -36,7 +36,9 @@ export default function Page() {
 			let usersQuery = supabase.from("usuarios").select("id,nombre,edad,descripcion,foto_url").limit(20)
 			if (excluded.length > 0) usersQuery = usersQuery.not("id", "in", `(${excluded.join(",")})`)
 			const { data: users } = await usersQuery
-			setProfiles((users as Profile[]) || [])
+			const loaded = (users as Profile[]) || []
+			setProfiles(loaded)
+			console.log('MVP: loaded profiles count=', loaded.length)
 			setLoading(false)
 		}
 		load()
@@ -132,6 +134,12 @@ export default function Page() {
 			<header className="mvp-header">
 				<h1>Tinder</h1>
 			</header>
+			{/* debug: show loaded count when available */}
+			{!loading && (
+				<div style={{ position: 'absolute', top: 8, left: 12, background: 'rgba(0,0,0,0.04)', padding: '6px 10px', borderRadius: 8, fontSize: 12 }}>
+					Perfiles: {profiles.length}
+				</div>
+			)}
 
 			<section className="card-area">
 				{loading && <p className="loading">Cargando perfiles...</p>}
@@ -233,6 +241,9 @@ export default function Page() {
 					background: linear-gradient(180deg, #ffffff, #fffaf6);
 					border-radius: 20px;
 					box-shadow: 0 14px 40px rgba(15, 23, 42, 0.15);
+					/* debug visuals: border and outline to ensure card is visible in WebView */
+					border: 2px dashed rgba(255,0,0,0.08);
+					outline: 1px solid rgba(255,0,0,0.04);
 					overflow: hidden;
 					display: flex;
 					flex-direction: column;
@@ -242,7 +253,8 @@ export default function Page() {
 
 				.card.stack { transform-origin: center; filter: saturate(0.98) brightness(0.99); }
 
-				.card.top { z-index: 30 }
+				.card.top { z-index: 110 }
+				.card-area { z-index: 100 }
 
 				.media { position:relative; height:64%; overflow:hidden }
 				.avatar {
