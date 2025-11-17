@@ -225,9 +225,11 @@ export default function Page() {
 					position: absolute;
 					width: 92%;
 					max-width: 380px;
-					/* limit card height so it fits inside the flexible card-area
-					   and leaves room for the fixed bottom actions + bottom nav */
-					max-height: calc(100% - 120px);
+					/* Keep an explicit height so percentage children (like .media) have a
+					   reference. Use the smaller of the original 84% or the available
+					   space minus bottom controls to avoid overflow in WebViews. */
+					height: min(84%, calc(100% - 120px));
+					max-height: calc(100% - 80px);
 					background: linear-gradient(180deg, #ffffff, #fffaf6);
 					border-radius: 20px;
 					box-shadow: 0 14px 40px rgba(15, 23, 42, 0.15);
