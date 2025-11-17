@@ -233,11 +233,12 @@ export default function Page() {
 					position: absolute;
 					width: 92%;
 					max-width: 380px;
-					/* Keep an explicit height so percentage children (like .media) have a
-					   reference. Use the smaller of the original 84% or the available
-					   space minus bottom controls to avoid overflow in WebViews. */
-					height: min(84%, calc(100% - 120px));
+					/* Use an explicit, WebView-friendly height so children with percentage
+					   heights render correctly. A vh fallback avoids relying on min()/calc
+					   combinations that might misbehave in some WebView versions. */
+					height: 68vh;
 					max-height: calc(100% - 80px);
+					top: 60px; /* move cards below header */
 					background: linear-gradient(180deg, #ffffff, #fffaf6);
 					border-radius: 20px;
 					box-shadow: 0 14px 40px rgba(15, 23, 42, 0.15);
