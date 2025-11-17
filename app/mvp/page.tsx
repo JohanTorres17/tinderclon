@@ -225,7 +225,9 @@ export default function Page() {
 					position: absolute;
 					width: 92%;
 					max-width: 380px;
-					height: 84%;
+					/* limit card height so it fits inside the flexible card-area
+					   and leaves room for the fixed bottom actions + bottom nav */
+					max-height: calc(100% - 120px);
 					background: linear-gradient(180deg, #ffffff, #fffaf6);
 					border-radius: 20px;
 					box-shadow: 0 14px 40px rgba(15, 23, 42, 0.15);
@@ -260,7 +262,9 @@ export default function Page() {
 					position: fixed;
 					left: 50%;
 					transform: translateX(-50%);
-					bottom: env(safe-area-inset-bottom, 18px);
+					/* place actions above any persistent bottom nav: add extra offset
+					   so buttons don't overlap the site's bottom navigation */
+					bottom: calc(env(safe-area-inset-bottom, 18px) + 64px);
 					width: calc(100% - 40px);
 					max-width: 420px;
 					display: flex;
