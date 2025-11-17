@@ -196,6 +196,10 @@ export default function Page() {
 					align-items: center;
 					padding: 12px;
 					min-height: 100vh;
+					/* ensure we can position the actions relative to viewport and
+					   respect safe-area insets inside mobile WebViews */
+					position: relative;
+					padding-bottom: env(safe-area-inset-bottom, 24px);
 					box-sizing: border-box;
 					background: linear-gradient(180deg, #fff 0%, #f7f7fb 100%);
 					font-family: Inter, Roboto, system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial;
@@ -207,7 +211,10 @@ export default function Page() {
 				.card-area {
 					width: 100%;
 					max-width: 420px;
-					height: 72vh;
+					/* make the card area flexible so it adapts inside WebViews and
+					avoids pushing the action buttons to the top */
+					flex: 1 1 auto;
+					min-height: 60vh;
 					position: relative;
 					display: flex;
 					align-items: center;
@@ -247,14 +254,19 @@ export default function Page() {
 				.name { font-weight:800; font-size:20px; color:#0b1220 }
 				.bio { margin-top:6px; color:#394047; font-size:14px }
 
+				/* anchor actions to bottom of viewport so they appear consistently
+				   inside WebViews and mobile browsers */
 				.mvp-actions {
-					width: 100%;
+					position: fixed;
+					left: 50%;
+					transform: translateX(-50%);
+					bottom: env(safe-area-inset-bottom, 18px);
+					width: calc(100% - 40px);
 					max-width: 420px;
 					display: flex;
 					justify-content: space-evenly;
 					gap: 18px;
-					margin-top: 12px;
-					padding-bottom: 18px;
+					z-index: 80;
 				}
 
 				.btn {
