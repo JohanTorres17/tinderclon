@@ -38,7 +38,6 @@ export default function Page() {
 			const { data: users } = await usersQuery
 			const loaded = (users as Profile[]) || []
 			setProfiles(loaded)
-			console.log('MVP: loaded profiles count=', loaded.length)
 			setLoading(false)
 		}
 		load()
@@ -185,10 +184,10 @@ export default function Page() {
 								)}
 								<div className="gradient" />
 								<div className="badge">{profile.edad}</div>
-								<div className="meta">
-									<div className="name">{profile.nombre}</div>
-									<div className="bio">{profile.descripcion}</div>
-								</div>
+							</div>
+							<div className="meta">
+								<div className="name">{profile.nombre}</div>
+								<div className="bio">{profile.descripcion}</div>
 							</div>
 						</div>
 					)
@@ -254,15 +253,15 @@ export default function Page() {
 				.card.top { z-index: 110 }
 				.card-area { z-index: 100 }
 
-				.media { position:relative; height:70%; min-height:220px; overflow:hidden; background: #f6f8fa }
+				.media { position:relative; height:60%; min-height:180px; overflow:hidden; background: #f6f8fa }
 				.avatar {
 					width:100%; height:100%; background-size:cover; background-position:center; display:block; background-color:#e9eef2;
-					min-height:220px; border-top-left-radius:20px; border-top-right-radius:20px;
+					min-height:180px; border-top-left-radius:20px; border-top-right-radius:20px;
 				}
-				.gradient { position:absolute; left:0; right:0; bottom:0; height:45%; background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 100%); }
-				.meta { position:absolute; left:16px; right:16px; bottom:18px; color: #fff; padding:0; }
-				.name { font-weight:800; font-size:20px; color: #fff }
-				.bio { margin-top:6px; color: rgba(255,255,255,0.9); font-size:13px }
+				.gradient { position:absolute; left:0; right:0; bottom:0; height:40%; background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 100%); }
+				.meta { padding: 14px; color: #0b1220; background: transparent }
+				.name { font-weight:800; font-size:18px; color: #0b1220 }
+				.bio { margin-top:6px; color: #394047; font-size:14px }
 				.overlay { position:absolute; top:18%; font-size:56px; padding:8px 12px; border-radius:12px; font-weight:900; pointer-events:none; transition:opacity 120ms linear, transform 120ms linear }
 				.overlay.like { left:18px; color: rgba(255,255,255,0.95); text-shadow: 0 6px 22px rgba(255,77,99,0.18) }
 				.overlay.nope { right:18px; color: rgba(255,255,255,0.95); text-shadow: 0 6px 22px rgba(0,0,0,0.25) }
