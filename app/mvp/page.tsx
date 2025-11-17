@@ -134,12 +134,7 @@ export default function Page() {
 			<header className="mvp-header">
 				<h1>Tinder</h1>
 			</header>
-			{/* debug: show loaded count when available */}
-			{!loading && (
-				<div style={{ position: 'absolute', top: 8, left: 12, background: 'rgba(0,0,0,0.04)', padding: '6px 10px', borderRadius: 8, fontSize: 12 }}>
-					Perfiles: {profiles.length}
-				</div>
-			)}
+
 
 			<section className="card-area">
 				{loading && <p className="loading">Cargando perfiles...</p>}
@@ -190,10 +185,10 @@ export default function Page() {
 								)}
 								<div className="gradient" />
 								<div className="badge">{profile.edad}</div>
-							</div>
-							<div className="meta">
-								<div className="name">{profile.nombre}</div>
-								<div className="bio">{profile.descripcion}</div>
+								<div className="meta">
+									<div className="name">{profile.nombre}</div>
+									<div className="bio">{profile.descripcion}</div>
+								</div>
 							</div>
 						</div>
 					)
@@ -244,16 +239,13 @@ export default function Page() {
 					height: 100%;
 					max-height: calc(100% - 80px);
 					top: 0;
-					background: linear-gradient(180deg, #ffffff, #fffaf6);
+					background: #fff;
 					border-radius: 20px;
-					box-shadow: 0 14px 40px rgba(15, 23, 42, 0.15);
-					/* debug visuals: border and outline to ensure card is visible in WebView */
-					border: 2px dashed rgba(255,0,0,0.08);
-					outline: 1px solid rgba(255,0,0,0.04);
-					overflow: visible;
+					box-shadow: 0 20px 40px rgba(2,6,23,0.12), 0 6px 18px rgba(2,6,23,0.06);
+					overflow: hidden;
 					display: flex;
 					flex-direction: column;
-					transition: transform 220ms cubic-bezier(.2,.9,.2,1);
+					transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 180ms ease;
 					will-change: transform;
 				}
 
@@ -262,11 +254,15 @@ export default function Page() {
 				.card.top { z-index: 110 }
 				.card-area { z-index: 100 }
 
-				.media { position:relative; height:64%; min-height:220px; overflow:hidden; background: linear-gradient(180deg,#fafafa,#fff) }
+				.media { position:relative; height:70%; min-height:220px; overflow:hidden; background: #f6f8fa }
 				.avatar {
 					width:100%; height:100%; background-size:cover; background-position:center; display:block; background-color:#e9eef2;
-					min-height:220px; border-radius:12px;
+					min-height:220px; border-top-left-radius:20px; border-top-right-radius:20px;
 				}
+				.gradient { position:absolute; left:0; right:0; bottom:0; height:45%; background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 100%); }
+				.meta { position:absolute; left:16px; right:16px; bottom:18px; color: #fff; padding:0; }
+				.name { font-weight:800; font-size:20px; color: #fff }
+				.bio { margin-top:6px; color: rgba(255,255,255,0.9); font-size:13px }
 				.overlay { position:absolute; top:18%; font-size:56px; padding:8px 12px; border-radius:12px; font-weight:900; pointer-events:none; transition:opacity 120ms linear, transform 120ms linear }
 				.overlay.like { left:18px; color: rgba(255,255,255,0.95); text-shadow: 0 6px 22px rgba(255,77,99,0.18) }
 				.overlay.nope { right:18px; color: rgba(255,255,255,0.95); text-shadow: 0 6px 22px rgba(0,0,0,0.25) }
