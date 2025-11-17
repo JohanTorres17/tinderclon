@@ -154,12 +154,15 @@ export default function Page() {
 
 				{profiles.map((profile, idx) => {
 					const isTop = idx === profiles.length - 1
-					const offset = (idx - (profiles.length - 1)) * 10
+					const stackIndex = profiles.length - 1 - idx // 0 = top
+					const offset = stackIndex * 10
+					// For the top card we include a translateX(-50%) offset so
+					// centering inside the card-area works together with drag transforms.
 					const style: React.CSSProperties = isTop
 						? {
-								transform: `translate(${drag.x}px, ${drag.y}px) rotate(${drag.rot}deg)`,
+								transform: `translate(calc(-50% + ${drag.x}px), ${drag.y}px) rotate(${drag.rot}deg)`,
 							}
-						: { transform: `scale(${1 + offset / 100}) translateY(${Math.abs(offset)}px)` }
+						: { transform: `translateX(-50%) scale(${1 - offset / 200}) translateY(${Math.abs(offset)}px)` }
 
 					return (
 						<div
@@ -225,33 +228,29 @@ export default function Page() {
 				.card-area {
 					width: 100%;
 					max-width: 420px;
-					/* make the card area flexible so it adapts inside WebViews and
-					avoids pushing the action buttons to the top */
-					flex: 1 1 auto;
-					min-height: 60vh;
+					/* fixed-height area to render stacked cards reliably inside WebView */
+					height: 68vh;
 					position: relative;
-					display: flex;
-					align-items: center;
-					justify-content: center;
+					display: block;
 				}
 
 				.card {
 					position: absolute;
+					left: 50%;
+					transform: translateX(-50%);
 					width: 92%;
 					max-width: 380px;
-					/* Use an explicit, WebView-friendly height so children with percentage
-					   heights render correctly. A vh fallback avoids relying on min()/calc
-					   combinations that might misbehave in some WebView versions. */
-					height: 68vh;
+					/* occupy the full card-area height */
+					height: 100%;
 					max-height: calc(100% - 80px);
-					top: 60px; /* move cards below header */
+					top: 0;
 					background: linear-gradient(180deg, #ffffff, #fffaf6);
 					border-radius: 20px;
 					box-shadow: 0 14px 40px rgba(15, 23, 42, 0.15);
 					/* debug visuals: border and outline to ensure card is visible in WebView */
 					border: 2px dashed rgba(255,0,0,0.08);
 					outline: 1px solid rgba(255,0,0,0.04);
-					overflow: hidden;
+					overflow: visible;
 					display: flex;
 					flex-direction: column;
 					transition: transform 220ms cubic-bezier(.2,.9,.2,1);
