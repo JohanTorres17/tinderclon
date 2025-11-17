@@ -239,8 +239,8 @@ export default function Page() {
 					max-height: calc(100% - 80px);
 					top: 0;
 					background: #fff;
-					border-radius: 20px;
-					box-shadow: 0 20px 40px rgba(2,6,23,0.12), 0 6px 18px rgba(2,6,23,0.06);
+					border-radius: 12px;
+					border: 1px solid #eee;
 					overflow: hidden;
 					display: flex;
 					flex-direction: column;
@@ -253,19 +253,19 @@ export default function Page() {
 				.card.top { z-index: 110 }
 				.card-area { z-index: 100 }
 
-				.media { position:relative; height:60%; min-height:180px; overflow:hidden; background: #f6f8fa }
+				.media { position:relative; height:60%; min-height:160px; overflow:hidden; background: transparent }
 				.avatar {
-					width:100%; height:100%; background-size:cover; background-position:center; display:block; background-color:#e9eef2;
-					min-height:180px; border-top-left-radius:20px; border-top-right-radius:20px;
+					width:100%; height:100%; background-size:cover; background-position:center; display:block; background-color:#ddd;
+					min-height:160px; border-top-left-radius:12px; border-top-right-radius:12px;
 				}
-				.gradient { position:absolute; left:0; right:0; bottom:0; height:40%; background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 100%); }
-				.meta { padding: 14px; color: #0b1220; background: transparent }
-				.name { font-weight:800; font-size:18px; color: #0b1220 }
+				/* no gradient, simple meta below image */
+				.meta { padding: 12px; color: #0b1220; background: transparent }
+				.name { font-weight:700; font-size:16px; color: #0b1220 }
 				.bio { margin-top:6px; color: #394047; font-size:14px }
 				.overlay { position:absolute; top:18%; font-size:56px; padding:8px 12px; border-radius:12px; font-weight:900; pointer-events:none; transition:opacity 120ms linear, transform 120ms linear }
 				.overlay.like { left:18px; color: rgba(255,255,255,0.95); text-shadow: 0 6px 22px rgba(255,77,99,0.18) }
 				.overlay.nope { right:18px; color: rgba(255,255,255,0.95); text-shadow: 0 6px 22px rgba(0,0,0,0.25) }
-				.gradient { position:absolute; left:0; right:0; bottom:0; height:40%; background:linear-gradient(180deg, transparent, rgba(0,0,0,0.45)); }
+				/* removed fancy gradient for simplicity */
 				.badge { position:absolute; right:12px; bottom:12px; background:rgba(255,255,255,0.9); padding:6px 10px; border-radius:999px; font-weight:700 }
 
 				.meta { padding:14px }
