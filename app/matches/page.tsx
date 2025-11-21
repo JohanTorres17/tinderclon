@@ -38,7 +38,7 @@ export default function MatchesPage() {
           <ul className="list">
             {matches.map((m) => (
               <li key={m.match.id} className="row">
-                <img src={m.other.foto_url || "https://via.placeholder.com/80"} alt={m.other.nombre} />
+                <img src={m.other.foto_url || "/placeholder.svg"} alt={m.other.nombre} />
                 <div className="info"><div className="name">{m.other.nombre}</div></div>
                 <a className="btn chat" href={`/messages?match=${m.match.id}`}>Abrir chat</a>
               </li>

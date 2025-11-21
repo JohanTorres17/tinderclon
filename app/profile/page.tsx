@@ -125,7 +125,7 @@ export default function ProfilePage() {
       <section className="card small profile-card">
         <h2>Mi perfil</h2>
         <div className="top">
-          <img className="avatar" src={user.foto_url || "https://via.placeholder.com/160"} alt={user.nombre} />
+          <img className="avatar" src={user.foto_url || "/placeholder.svg"} alt={user.nombre} />
           <div className="meta-top">
             <div className="name">{user.nombre}</div>
             <div className="email muted">{user.email}</div>

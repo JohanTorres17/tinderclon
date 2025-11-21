@@ -81,12 +81,12 @@ export default function ClientMessages() {
                 const sender = usersMap[m.emisor_id] || { id: m.emisor_id, nombre: 'Yo', foto_url: '' }
                 return (
                   <div key={m.id} className={`msg ${isFromMe ? 'from-me' : 'from-them'}`}>
-                    {!isFromMe && <img className="avatar" src={sender.foto_url || 'https://via.placeholder.com/48'} alt={sender.nombre} />}
+                    {!isFromMe && <img className="avatar" src={sender.foto_url || '/placeholder.svg'} alt={sender.nombre} />}
                     <div className="bubble">
                       <div className="text">{m.contenido}</div>
                       <div className="meta">{!isFromMe ? sender.nombre : 'Tú'}</div>
                     </div>
-                    {isFromMe && <img className="avatar" src={usersMap[currentUid || '']?.foto_url || 'https://via.placeholder.com/48'} alt="Yo" />}
+                    {isFromMe && <img className="avatar" src={usersMap[currentUid || '']?.foto_url || '/placeholder.svg'} alt="Yo" />}
                   </div>
                 )
               })}

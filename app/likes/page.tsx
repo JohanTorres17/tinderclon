@@ -110,7 +110,7 @@ export default function LikesPage() {
           <ul className="list">
             {likes.map((u) => (
               <li key={u.id} className="row">
-                <img src={u.foto_url || "https://via.placeholder.com/80"} alt={u.nombre} />
+                <img src={u.foto_url || "/placeholder.svg"} alt={u.nombre} />
                 <div className="info">
                   <div className="name">{u.nombre}</div>
                 </div>

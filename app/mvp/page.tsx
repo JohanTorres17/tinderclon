@@ -174,7 +174,7 @@ export default function Page() {
 									className="avatar"
 									role="img"
 									aria-label={profile.nombre || 'imagen'}
-									style={{ backgroundImage: `url(${profile.foto_url || 'https://via.placeholder.com/600'})` }}
+									style={{ backgroundImage: `url(${profile.foto_url || '/placeholder.svg'})` }}
 								/>
 								{isTop && (
 									<>
